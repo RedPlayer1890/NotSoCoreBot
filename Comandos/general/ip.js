@@ -1,5 +1,7 @@
 const util = require("minecraft-server-util");
-const { MessageEmbed } = require("discord.js");
+const {
+    MessageEmbed
+} = require("discord.js");
 
 module.exports = {
     name: "ip",
@@ -8,8 +10,12 @@ module.exports = {
     usage: "ip",
     category: "general",
     run: async function (client, message, args) {
-        const { getIP } = require('../../database/admin');
-        const { IP } = await getIP(message.guild.id);
+        const {
+            getIP
+        } = require('../../database/admin');
+        const {
+            IP
+        } = await getIP(message.guild.id);
 
         if (!IP) {
             let embed = new MessageEmbed()
@@ -29,9 +35,9 @@ module.exports = {
                 .then((res, err) => {
                     if (err) {
                         let embed = new MessageEmbed()
-                            .setTitle("¡Todavía no me han configurado!")
-                            .setDescription("Para configurarme, utiliza el comando `!setip <ip>`")
-                            .setColor('RANDOM')
+                            .setTitle("Ha ocurrido un error...")
+                            .setDescription("Ha ocurrido un error intentando obtener la información de el servidor.\nUna posible causa, puede ser que no hayan establecido la ip. Si eres un administrador, usa !setip <ip> para establecerla.")
+                            .setColor('RED')
                             .setTimestamp()
                             .setFooter(`${message.guild.name}`);
 
