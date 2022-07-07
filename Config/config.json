@@ -1,0 +1,22 @@
+{
+    "token": "",
+    "dirbase": "./database/database.db3",
+    "prefix": "!",
+    "logsChannels": {
+        "sanciones": "sanciones",
+        "transcriptChannel": "transcripts"
+    },
+    "memesDiarios": {
+        "activado": false,
+        "canal": "memes-diarios",
+        "servidorID": "539098984100908864"
+    },
+    "reportesBugs": {
+        "activado": false,
+        "canalID": "539098984100908864"
+    },
+    "rolesInfo": {
+        "Owner": "Owner",
+        "Staff": "Soporte"
+    }
+}
