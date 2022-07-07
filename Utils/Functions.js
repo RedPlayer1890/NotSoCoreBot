@@ -34,12 +34,10 @@ module.exports = {
         guild: guild
     }) {
         const config = require('../Config/config.json');
-        guild.roles.create(config.rolesInfo.Staff, {
-            color: 'BLUE',
-            permissions: [],
-            position: 13,
-            reason: 'Role de soporte.',
-            mentionable: false
+        guild.roles.create({
+            name: config.rolesInfo.Staff,
+            color: '#0099ff',
+            reason: 'Se necesita el rol de Staff para poder abrir tickets.'
         });
     },
     ifNotOwnerRole: async function ({
@@ -47,12 +45,10 @@ module.exports = {
     }) {
         const config = require('../Config/config.json');
 
-        guild.roles.create(config.rolesInfo.Owner, {
-            color: 'RED',
-            permissions: [],
-            position: 15,
-            reason: 'Role de dueño.',
-            mentionable: false
-        });
+        guild.roles.create({
+            name: config.rolesInfo.Owner,
+            color: '#0099ff',
+            reason: 'Se necesita el rol de Owner para poder abrir tickets.'
+        })
     }
 }
