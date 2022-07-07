@@ -16,7 +16,7 @@ module.exports = {
         embedEstado.setColor("#2C2F33");
         embedEstado.setTitle("Estadísticas actuales de el bot.");
 
-        embedEstado.setDescription(`¡Hola! Soy un bot desarrollado por **RedPlay1890#2361** para HoliCraft Network.\n\nSi requieres soporte de el desarrollador con algún problema de el mismo bot, ¡te invito a su [discord](https://discord.gg/x7pP9YytDt)!`);
+        embedEstado.setDescription(`¡Hola! Soy un bot desarrollado por **RedPlay1890#2361**.\n\nSi requieres soporte de el desarrollador con algún problema de el mismo bot, ¡te invito a su [discord](https://discord.gg/x7pP9YytDt)!`);
 
         embedEstado.addField("Mi ping actual", `${client.ws.ping}ms`);
         embedEstado.addField("Versión actual", `${client.version}`);
