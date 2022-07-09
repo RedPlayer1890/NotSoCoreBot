@@ -12,6 +12,11 @@ client.commands = new Collection();
 
 const cargaEventos = require("./Estructuras/EventHandler");
 
+client.version = "3.5.0";
+client.lastUpdate = () => {
+  return "09/07/2022";
+}
+
 cargaEventos(client);
 
 module.exports = client;

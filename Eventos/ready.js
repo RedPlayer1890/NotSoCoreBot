@@ -15,8 +15,56 @@ module.exports = async function () {
     console.log(`[IMPORTANTE] Cargando comandos...`);
 
     commandLoader(client);
+    
+    let guild_count = client.guilds.cache.size;
+        let user_count = client.users.cache.size;
 
-    console.log(`[IMPORTANTE] Si es la primera vez que enciendes el bot, asegúrate de revisar el archivo ./Config/config.json para configurar múltiples valores.`);
+        let estados = [
+            Primero = {
+                name: '!help',
+                actividad: 'WATCHING',
+                status: 'online'
+            },
+            Segundo = {
+                name: 'Con tu corazón',
+                actividad: 'PLAYING',
+                status: 'idle'
+            },
+            Tercero = {
+                name: `${guild_count} servidores, ${user_count} usuarios.`,
+                actividad: 'COMPETING',
+                status: 'dnd'
+            },
+            Cuarto = {
+                name: '¡Actualizaciones constantes!',
+                actividad: 'STREAMING',
+                status: 'idle'
+            },
+            Quinto = {
+                name: 'Beta versión 2.5.3',
+                actividad: 'PLAYING',
+                status: 'online'
+            },
+            Sexto = {
+                name: 'No importa este estado',
+                actividad: 'No se establecerá',
+                status: 'Escribe lo que quieras acá'
+            }
+        ];
+
+        let integro = 0;
+
+        setInterval(async () => {
+            client.user.setActivity(estados[integro].name, { type: estados[integro].actividad });
+            client.user.setStatus(estados[integro].status);
+
+            integro++;
+
+            if (integro == 5) {
+                integro = 0;
+            }
+
+        }, 10000);
 
     if (config.memesDiarios.activado) {
         setInterval(() => {

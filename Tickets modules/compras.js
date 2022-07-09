@@ -1,10 +1,18 @@
-const 
+const
     TConfig = require('../Config/Tickets-Config.js'),
-    { _ticketsQuestions } = require('../Config/Tickets Questions'),
+    {
+        _ticketsQuestions
+    } = require('../Config/Tickets Questions'),
     config = require('../Config/config.json'),
-    { MessageEmbed } = require('discord.js'),
-    { ifNotSupportRole } = require('../Utils/Functions'),
-    { newTicket } = require('../database/admin');
+    {
+        MessageEmbed
+    } = require('discord.js'),
+    {
+        ifNotSupportRole
+    } = require('../Utils/Functions'),
+    {
+        newTicket
+    } = require('../database/admin');
 
 module.exports = async function (interaction) {
 
@@ -107,7 +115,7 @@ module.exports = async function (interaction) {
                         if (mensaje3.attachments && mensaje3.attachments.size !== 0)
                             respuesta3 = `\n> **Texto**\n${ mensaje3.first().content}\n\n> **Enlaces Incluidos**\n${mensaje3.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`
                     }
-                    
+
                     respuesta3 = mensaje3.first().content;
 
                     let pregunta4 = new MessageEmbed()
@@ -132,43 +140,17 @@ module.exports = async function (interaction) {
                                 respuesta4 = `\n> **Texto**\n${ mensaje4.first().content}\n\n> **Enlaces Incluidos**\n${mensaje4.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`
                         }
 
-                        respuesta4 = mensaje4.first().content;
-
-                        let pregunta5 = new MessageEmbed()
+                        channel.bulkDelete(15);
+                        var finalEmbed = new MessageEmbed()
                             .setColor('#0099ff')
-                            .setDescription(_ticketsQuestions.TicketsRanCom.quinta);
+                            .setTitle(`Ticket de Compras.`)
+                            .setAuthor(`${guild.name}`, guild.iconURL())
+                            .setDescription(`**${_ticketsQuestions.TicketsRanCom.primera}**\n- ${respuesta}\n**${_ticketsQuestions.TicketsRanCom.segunda}**\n- ${respuesta2}\n**${_ticketsQuestions.TicketsRanCom.tercera}**\n- ${respuesta3}\n**${_ticketsQuestions.TicketsRanCom.cuarta}**\n- ${respuesta4}\n**${_ticketsQuestions.TicketsRanCom.quinta}**\n- ${respuesta5}`)
+                            .setTimestamp();
                         channel.send({
-                            embeds: [pregunta5]
-                        });
-                        channel.awaitMessages({
-                            filter: m => m.author.id === user.id && !m.author.bot,
-                            max: 1
-                        }).then(async mensaje5 => {
+                            content: `${user}, ${staffRole}`,
+                            embeds: [finalEmbed]
 
-                            var respuesta5;
-
-                            if (mensaje5.first().content === ``) {
-                                if (mensaje5.attachments.size === 0) respuesta5 = mensaje5.first.content();
-                                respuesta5 = mensaje5.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-                            }
-                            if (mensaje5.first().content !== ``) {
-                                if (mensaje5.attachments && mensaje5.attachments.size !== 0)
-                                    respuesta5 = `\n> **Texto**\n${ mensaje5.first().content}\n\n> **Enlaces Incluidos**\n${mensaje5.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`
-                            }
-
-                            respuesta5 = mensaje5.first().content;
-
-                            channel.bulkDelete(15);
-                            var finalEmbed = new MessageEmbed()
-                                .setColor('#0099ff')
-                                .setTitle(`Ticket de Compras.`)
-                                .setAuthor(`${guild.name}`, guild.iconURL())
-                                .setDescription(`**${_ticketsQuestions.TicketsRanCom.primera}**\n- ${respuesta}\n**${_ticketsQuestions.TicketsRanCom.segunda}**\n- ${respuesta2}\n**${_ticketsQuestions.TicketsRanCom.tercera}**\n- ${respuesta3}\n**${_ticketsQuestions.TicketsRanCom.cuarta}**\n- ${respuesta4}\n**${_ticketsQuestions.TicketsRanCom.quinta}**\n- ${respuesta5}`)
-                                .setTimestamp();
-                            channel.send({
-                                content: `${user}, ${staffRole}`,
-                                embeds: [finalEmbed]
-                            });
                         });
                     });
                 });

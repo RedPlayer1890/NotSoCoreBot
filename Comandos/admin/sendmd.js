@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js");
+
 module.exports = {
     name: 'sendmd',
     aliases: [],
@@ -7,7 +9,7 @@ module.exports = {
     category: 'admin',
     userPerms: ["ADMINISTRATOR"],
     run: async function (client, message, args) {
-        const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
+        const user = message.mentions.users.first() || message.guild.members.cache.find(m => m.id === args[0]);
 
         if (!user) return message.reply("¡Debes especificar un usuario!");
         if (!args[1]) return message.reply("¡Debes escribir un mensaje!");
