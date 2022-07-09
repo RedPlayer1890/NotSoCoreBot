@@ -29,6 +29,7 @@ module.exports = {
         if (IP !== undefined || IP !== null) {
             util.status(IP)
                 .then((res, err) => {
+                    console.log(res);
                     if (err) {
                         message.reply({
                             embeds: [
@@ -39,7 +40,7 @@ module.exports = {
                             ]
                         })
                     }
-                    let motd = `http://status.mclive.eu/MinecraftServer/${IP}/25565/banner.png`
+                    let motd = `http://status.mclive.eu/${message.guild.name}/${IP}/25565/banner.png`
                     const embed = new MessageEmbed()
                         .setTitle(`Informacion sobre ${message.guild.name}`)
                         .addField('IP:', IP)
