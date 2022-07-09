@@ -35,9 +35,13 @@ module.exports = {
         let query = "SELECT * FROM prefixes WHERE guildID = ?";
         let result = await queries.getQuery(query, idserver);
 
-        if (result != undefined) return true;
-        
-        return false;
+        if (result != undefined) {
+            return true;
+
+        } else {
+            return false;
+
+        }
     },
     addPrefix: async function (idserver, prefix) {
         let query = "INSERT INTO prefixes (guildID, prefix) VALUES(?, ?)";
@@ -46,7 +50,7 @@ module.exports = {
     },
     getPrefix: async function (idserver) {
         let query = "SELECT * FROM prefixes WHERE guildID = ?";
-        let result = await queries.getQuery(query, [idserver]);
+        let result = await queries.getQuery(query, idserver);
 
         return result;
 
@@ -67,9 +71,9 @@ module.exports = {
 
     hasIP: async function (guildID) {
         let query = "SELECT * FROM ips WHERE guildID = ?";
-        let result = await queries.getQuery(query, [guildID]);
+        let result = await queries.getQuery(query, guildID);
 
-        if (result !== undefined)
+        if (!result === undefined)
             return true;
 
 
@@ -78,15 +82,13 @@ module.exports = {
 
     getIP: async function (guildID) {
         let query = "SELECT * FROM ips WHERE guildID = ?";
-        let result = await queries.getQuery(query, [guildID]);
+        let result = await queries.getQuery(query, guildID);
 
         if (result !== undefined) {
             return result;
         }
 
-        const IP = 'hypixel.net';
-
-        return IP;
+        return undefined;
     },
 
     setIP: async function (guildID, IP) {
@@ -101,6 +103,6 @@ module.exports = {
 
     deleteIP: async function (guildID) {
         let query = "DELETE FROM ips WHERE guildID = ?";
-        await queries.runQuery(query, [guildID]);
+        await queries.runQuery(query, guildID);
     }
 }

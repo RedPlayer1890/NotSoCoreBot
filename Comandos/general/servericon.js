@@ -17,7 +17,7 @@ module.exports = {
           format: "png",
         })})`
       )
-      .setImage(server.iconURL({ size: 2048, dynamic: true, format: "png" }))
+      .setImage(message.guild.iconURL({ size: 2048, dynamic: true, format: "png" }))
       .setColor("#00ffff");
     message.channel.send({ embeds: [embed] });
     message.delete();

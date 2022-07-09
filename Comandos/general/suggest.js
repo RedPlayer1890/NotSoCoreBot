@@ -8,9 +8,9 @@ module.exports = {
   userPerms: ["ADMINISTRATOR"],
   botPerms: ["EMBED_LINKS"],
   run: async (client, message, args) => {
-    if (!message.author.id === "123123") return message.reply(`Comando en desarrollo.`);
+    if (!config.suggestChannel.activo) return message.reply(`Esta función no está activa por el momento.`);
     const avatar = message.author.avatarURL;
-    const suggestchannel = client.channels.cache.get("987748705681686578");
+    const suggestchannel = client.channels.cache.get(config.suggestChannel.canalID);
     const suggestion = args.join(" ");
     if (!suggestion) {
       return message.channel.send({
@@ -36,13 +36,12 @@ module.exports = {
     const embed = new MessageEmbed()
       .setAuthor(`¡Sugerencia!`, avatar)
       .setDescription(`${suggestion} \n\nPor: **${message.author.tag}**`)
-      .setFooter(`ID: ${message.author.id}`)
       .setColor("#00ffff");
 
     suggestchannel.send({ embeds: [embed] });
   },
   catch(error) {
-    const errorlogs = client.channels.cache.get("987748705681686578");
+    const errorlogs = client.channels.cache.get(config.canalErrores);
     message.channel.send({
       content: "¡Ha ocurrido un error ejecutando el comando suggest!"
     });

@@ -6,6 +6,11 @@
         "sanciones": "sanciones",
         "transcriptChannel": "transcripts"
     },
+    "suggestChannel": {
+        "activo": true,
+        "canalID": "569098984100908800"
+    },
+    "canalErrores": "errores",
     "memesDiarios": {
         "activado": false,
         "canal": "memes-diarios",

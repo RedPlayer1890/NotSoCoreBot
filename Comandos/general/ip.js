@@ -1,21 +1,17 @@
-const util = require("minecraft-server-util");
-const {
-    MessageEmbed
-} = require("discord.js");
+const { MessageEmbed } = require('discord.js');
+const util = require('minecraft-server-util');
 
 module.exports = {
-    name: "ip",
-    description: "Muestra la ip del servidor",
-    aliases: [],
-    usage: "ip",
-    category: "general",
+    name: 'ip',
+    aliases: ['serverip'],
+    type: 'BOTH',
+    category: 'general',
+    slashCommandOptons: [],
+    description: 'Obtén la dirección IP y estado de el servidor.',
+    permisos: ["SEND_MESSAGES"],
     run: async function (client, message, args) {
-        const {
-            getIP
-        } = require('../../database/admin');
-        const {
-            IP
-        } = await getIP(message.guild.id);
+        const { getIP } = require('../../database/admin.js');
+        const { IP } = await getIP(message.guild.id);
 
         if (!IP) {
             let embed = new MessageEmbed()
@@ -25,31 +21,28 @@ module.exports = {
                 .setTimestamp()
                 .setFooter(`${message.guild.name}`);
 
-            return message.reply({
+            message.reply({
                 embeds: [embed]
             });
         }
 
-        if (!IP === undefined || !IP === null) {
+        if (IP !== undefined || IP !== null) {
             util.status(IP)
                 .then((res, err) => {
                     if (err) {
-                        let embed = new MessageEmbed()
-                            .setTitle("Ha ocurrido un error...")
-                            .setDescription("Ha ocurrido un error intentando obtener la información de el servidor.\nUna posible causa, puede ser que no hayan establecido la ip. Si eres un administrador, usa !setip <ip> para establecerla.")
-                            .setColor('RED')
-                            .setTimestamp()
-                            .setFooter(`${message.guild.name}`);
-
-                        return message.reply({
-                            embeds: [embed]
-                        });
+                        message.reply({
+                            embeds: [
+                                new MessageEmbed()
+                                .setTitle("Ups...")
+                                .setDescription("No se pudo obtener el estado del servidor...\n¿Puede que esté fuera de línea?")
+                                .setColor('RANDOM')
+                            ]
+                        })
                     }
-
                     let motd = `http://status.mclive.eu/MinecraftServer/${IP}/25565/banner.png`
                     const embed = new MessageEmbed()
                         .setTitle(`Informacion sobre ${message.guild.name}`)
-                        .addField('IP:', `${IP}`)
+                        .addField('IP:', IP)
                         .addField('Version base: ', `${res.version.name}`)
                         .addField('Jugadores en linea:', `${res.players.online} / ${res.players.max}`)
                         .setFooter(`${message.guild.name}`)
@@ -60,19 +53,55 @@ module.exports = {
                     return message.channel.send({
                         embeds: [embed]
                     });
-                }).catch(err => {
-                    let embed = new MessageEmbed()
-                        .setTitle("Ha ocurrido un error...")
-                        .setDescription("Ha ocurrido un error intentando obtener la información de el servidor.\nUna posible causa, puede ser que no hayan establecido la ip. Si eres un administrador, usa !setip <ip> para establecerla.")
-                        .setColor('RED')
-                        .setTimestamp()
-                        .setFooter(`${message.guild.name}`);
+                });
+        }
+    },
+    slash: async function (interaction, args, client) {
+        const { getIP } = require('../../database/admin.js');
+        const { IP } = await getIP(interaction.guild.id);
 
-                    message.channel.send({
+        if (!IP) {
+            let embed = new MessageEmbed()
+                .setTitle("¡Todavía no me han configurado!")
+                .setDescription("Para configurarme, utiliza el comando `!setip <ip>`")
+                .setColor('RANDOM')
+                .setTimestamp()
+                .setFooter(`${interaction.guild.name}`);
+
+            interaction.reply({
+                embeds: [embed]
+            });
+        }
+
+        if (IP !== undefined || IP !== null) {
+            util.status(IP)
+                .then((res, err) => {
+
+                    if (err) {
+                        interaction.reply({
+                            embeds: [
+                                new MessageEmbed()
+                                .setTitle("Ups...")
+                                .setDescription("No se pudo obtener el estado del servidor...\n¿Puede que esté fuera de línea?")
+                                .setColor('RANDOM')
+                            ]
+                        })
+                    }
+
+                    let motd = `http://status.mclive.eu/MinecraftServer/${IP}/25565/banner.png`
+                    const embed = new MessageEmbed()
+                        .setTitle(`Informacion sobre ${interaction.guild.name}`)
+                        .addField('IP:', IP)
+                        .addField('Version base: ', `${res.version.name}`)
+                        .addField('Jugadores en linea:', `${res.players.online} / ${res.players.max}`)
+                        .setFooter(`${interaction.guild.name}`)
+                        .setImage(motd)
+                        .setTimestamp()
+                        .setColor('RANDOM')
+
+                    return interaction.reply({
                         embeds: [embed]
                     });
-
-                    console.log(`[MC STATUS] Error intentando obtener el estado.\nError: ` + err);
                 });
         }
     }
