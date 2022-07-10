@@ -58,7 +58,7 @@ module.exports = async function (interaction) {
             var respuesta;
 
             if (mensaje.first().content === ``) {
-                if (mensaje.attachments.size === 0) respuesta = mensaje.first.content();
+                if (!mensaje.attachments) respuesta = mensaje.first.content();
                   respuesta = mensaje.attachments.map(m => `${m.proxyURL}`).join(`\n`);
             }
             if (mensaje.first().content !== ``) {
@@ -81,7 +81,7 @@ module.exports = async function (interaction) {
                 var respuesta2;
 
                 if (mensaje2.first().content === ``) {
-                    if (mensaje2.attachments.size === 0) respuesta2 = mensaje2.first.content();
+                    if (!mensaje.attachments) respuesta2 = mensaje2.first.content();
                       respuesta2 = mensaje2.attachments.map(m => `${m.proxyURL}`).join(`\n`);
                 }
                 if (mensaje2.first().content !== ``) {
@@ -105,7 +105,7 @@ module.exports = async function (interaction) {
                     var respuesta3;
 
                     if (mensaje3.first().content === ``) {
-                        if (mensaje3.attachments.size === 0) respuesta3 = mensaje3.first.content();
+                        if (!mensaje.attachments) respuesta3 = mensaje3.first.content();
                         respuesta3 = mensaje3.attachments.map(m => `${m.proxyURL}`).join(`\n`);
                     }
                     if (mensaje3.first().content !== ``) {
@@ -129,7 +129,7 @@ module.exports = async function (interaction) {
                         var respuesta4;
 
                         if (mensaje4.first().content === ``) {
-                            if (mensaje4.attachments.size === 0) respuesta4 = mensaje4.first.content();
+                            if (!mensaje.attachments) respuesta4 = mensaje4.first.content();
                             respuesta4 = mensaje4.attachments.map(m => `${m.proxyURL}`).join(`\n`);
                         }
                         if (mensaje4.first().content !== ``) {
@@ -153,7 +153,7 @@ module.exports = async function (interaction) {
                             var respuesta5;
 
                             if (mensaje5.first().content === ``) {
-                                if (mensaje5.attachments.size === 0)   respuesta5 = mensaje5.first.content();
+                                if (!mensaje.attachments)   respuesta5 = mensaje5.first.content();
                                 respuesta5 = mensaje5.attachments.map(m => `${m.proxyURL}`).join(`\n`);
                             }
                             if (mensaje5.first().content !== ``) {
