@@ -3,7 +3,7 @@ const
     { _ticketsQuestions } = require('../Config/Tickets Questions'),
     config = require('../Config/config.json'),
     { MessageEmbed } = require('discord.js'),
-    { ifNotSupportRole } = require('../Utils/Functions'),
+    { ifNotSupportRole, checkIfAtt } = require('../Utils/Functions'),
     { newTicket } = require('../database/admin');
 
 module.exports = async function (interaction) {
@@ -48,17 +48,7 @@ module.exports = async function (interaction) {
             filter: m => m.author.id === user.id && !m.author.bot,
             max: 1
         }).then(async mensaje => {
-            let respuesta1;
-            if (mensaje.first().content === ``) {
-                if (mensaje.first().attachments.size === 0) respuesta1 = mensaje.first().content;
-                respuesta1 = mensaje.first().attachments.map(m => `${m.proxyURL}`).join(`\n`);
-            }
-            if (mensaje.first().content !== ``) {
-                if (mensaje.first().attachments && mensaje.first().attachments.size !== 0)
-                    respuesta1 = `\n> **Texto**\n${mensaje.first().content}\n\n> **Enlaces Incluidos**\n${mensaje.first().attachments.map(m => `${m.proxyURL}`).join(`\n`)}`
-            }
-
-            respuesta1 = mensaje.first().content;
+            let respuesta1 = await checkIfAtt({ message: mensaje });
 
 
             channel.bulkDelete(15);

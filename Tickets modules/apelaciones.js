@@ -4,6 +4,7 @@ const
     config = require('../Config/config.json'), 
     { MessageEmbed } = require('discord.js'), 
     { ifNotSupportRole } = require('../Utils/Functions'),
+    { checkIfAtt } = require('../Utils/Functions'),
     { newTicket } = require('../database/admin');
 
 module.exports = async function (interaction) {
@@ -34,13 +35,6 @@ module.exports = async function (interaction) {
         .setDescription(`Responde las preguntas que el bot te hará, para poder continuar.\n\n¡Recuerda! Tienes 60 segundos para responder a cada pregunta.`)
         .setTimestamp();
 
-    /**
-     * ! 5 preguntas
-     * ? Sacadas de _ticketsQuestions.TicketsApel
-     */
-
-    let filter = (message) => message.author.id === user.id && !message.author.bot;
-
     channel.send({
         content: `${user}`,
         embeds: [embed]
@@ -55,18 +49,7 @@ module.exports = async function (interaction) {
             filter: m => m.author.id === user.id && !m.author.bot,
             max: 1
         }).then(async mensaje => {
-            var respuesta;
-
-            if (mensaje.first().content === ``) {
-                if (!mensaje.attachments) respuesta = mensaje.first.content();
-                  respuesta = mensaje.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-            }
-            if (mensaje.first().content !== ``) {
-                if (mensaje.attachments && mensaje.attachments.size !== 0)
-                      respuesta = `\n> **Texto**\n${ mensaje.first().content}\n\n> **Enlaces Incluidos**\n${mensaje.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`;
-            }
-
-            respuesta = mensaje.first().content;
+            var respuesta = await checkIfAtt({ message: mensaje });
 
             let pregunta2 = new MessageEmbed()
                 .setColor('#0099ff')
@@ -78,18 +61,7 @@ module.exports = async function (interaction) {
                 filter: m => m.author.id === user.id && !m.author.bot,
                 max: 1
             }).then(async mensaje2 => {
-                var respuesta2;
-
-                if (mensaje2.first().content === ``) {
-                    if (!mensaje.attachments) respuesta2 = mensaje2.first.content();
-                      respuesta2 = mensaje2.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-                }
-                if (mensaje2.first().content !== ``) {
-                    if (mensaje2.attachments && mensaje2.attachments.size !== 0)
-                        respuesta2 = `\n> **Texto**\n${mensaje2.first().content}\n\n> **Enlaces Incluidos**\n${mensaje2.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`
-                }
-
-                respuesta2 = mensaje2.first().content;
+                var respuesta2 = await checkIfAtt({ message: mensaje2 });
 
                 let pregunta3 = new MessageEmbed()
                     .setColor('#0099ff')
@@ -102,18 +74,7 @@ module.exports = async function (interaction) {
                     max: 1
                 }).then(async mensaje3 => {
 
-                    var respuesta3;
-
-                    if (mensaje3.first().content === ``) {
-                        if (!mensaje.attachments) respuesta3 = mensaje3.first.content();
-                        respuesta3 = mensaje3.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-                    }
-                    if (mensaje3.first().content !== ``) {
-                        if (mensaje3.attachments && mensaje3.attachments.size !== 0)
-                        respuesta3 = `\n> **Texto**\n${mensaje3.first().content}\n\n> **Enlaces Incluidos**\n${mensaje3.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`;
-                    }
-
-                    respuesta3 =  mensaje3.first().content;
+                    var respuesta3 = await checkIfAtt({ message: mensaje3 });
 
                     let pregunta4 = new MessageEmbed()
                         .setColor('#0099ff')
@@ -126,18 +87,7 @@ module.exports = async function (interaction) {
                         max: 1
                     }).then(async mensaje4 => {
 
-                        var respuesta4;
-
-                        if (mensaje4.first().content === ``) {
-                            if (!mensaje.attachments) respuesta4 = mensaje4.first.content();
-                            respuesta4 = mensaje4.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-                        }
-                        if (mensaje4.first().content !== ``) {
-                            if (mensaje4.attachments && mensaje4.attachments.size !== 0)
-                            respuesta4 = `\n> **Texto**\n${mensaje4.first().content}\n\n> **Enlaces Incluidos**\n${mensaje4.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`
-                        }
-
-                        respuesta4 = mensaje4.first().content;
+                        var respuesta4 = await checkIfAtt({ message: mensaje4 });
 
                         let pregunta5 = new MessageEmbed()
                             .setColor('#0099ff')
@@ -150,18 +100,7 @@ module.exports = async function (interaction) {
                             max: 1
                         }).then(async mensaje5 => {
 
-                            var respuesta5;
-
-                            if (mensaje5.first().content === ``) {
-                                if (!mensaje.attachments)   respuesta5 = mensaje5.first.content();
-                                respuesta5 = mensaje5.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-                            }
-                            if (mensaje5.first().content !== ``) {
-                                if (mensaje5.attachments && mensaje5.attachments.size !== 0)
-                                respuesta5 = `\n> **Texto**\n${mensaje5.first().content}\n\n> **Enlaces Incluidos**\n${mensaje5.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`
-                            }
-
-                            respuesta5 =  mensaje5.first().content;
+                            var respuesta5 = await checkIfAtt({ message: mensaje5 });
 
                             channel.bulkDelete(15);
                             var finalEmbed = new MessageEmbed()

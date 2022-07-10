@@ -50,5 +50,23 @@ module.exports = {
             color: '#0099ff',
             reason: 'Se necesita el rol de Owner para poder abrir tickets.'
         })
+    },
+    checkIfAtt: async function ({ message: message }) {
+        return new Promise(async (resolve, reject) => {
+            
+            var respuesta;
+
+            if (message.first().content === ``) {
+                if (!message.first().attachments || message.first().attachments.size === 0) respuesta = message.first().content;
+                respuesta = message.first().attachments.map(m => `${m.proxyURL}`).join(`\n`);
+            }
+            if (message.first().content !== ``) {
+                if (message.first().attachments && message.first().attachments.size !== 0) respuesta = `\n> **Texto**\n${message.first().content}\n\n> **Enlaces Incluidos**\n${message.first().attachments.map(m => `${m.proxyURL}`).join(`\n`)}`;
+
+                else respuesta = message.first().content;
+            }
+
+            resolve(respuesta);
+        })
     }
 }

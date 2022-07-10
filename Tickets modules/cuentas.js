@@ -2,7 +2,8 @@ const
     TConfig = require('../Config/Tickets-Config.js'), 
     { _ticketsQuestions } = require('../Config/Tickets Questions'),
     config = require('../Config/config.json'), 
-    { MessageEmbed } = require('discord.js'), 
+    { MessageEmbed } = require('discord.js'),
+    { ifNotSupportRole, checkIfAtt } = require('../Utils/Functions'),
     { newTicket } = require('../database/admin');
 
 module.exports = async function (interaction) {
@@ -48,19 +49,7 @@ module.exports = async function (interaction) {
             max: 1
         }).then(async mensaje => {
 
-            var respuesta;
-
-            if ( mensaje.first().content === ``) {
-                if (!mensaje.attachments)   respuesta = mensaje.first.content();
-                  respuesta = mensaje.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-            }
-            if ( mensaje.first().content !== ``) {
-                if (mensaje.attachments && mensaje.attachments.size !== 0)
-                      respuesta = `\n> **Texto**\n${ mensaje.first().content}\n\n> **Enlaces Incluidos**\n${mensaje.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`
-
-            }
-
-            respuesta =  mensaje.first().content;
+            var respuesta = await checkIfAtt({ message: mensaje });
 
             let pregunta2 = new MessageEmbed()
                 .setColor('#0099ff')
@@ -73,20 +62,7 @@ module.exports = async function (interaction) {
                 max: 1
             }).then(async mensaje2 => {
 
-                var respuesta2;
-
-                if ( mensaje2.first().content === ``) {
-                    if (!mensaje.attachments)   respuesta2 = mensaje2.first.content();
-                      respuesta2 = mensaje2.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-                }
-                if ( mensaje2.first().content !== ``) {
-                    if (mensaje2.attachments && mensaje2.attachments.size !== 0)
-                          respuesta2 = `\n> **Texto**\n${ mensaje2.first().content}\n\n> **Enlaces Incluidos**\n${mensaje2.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`
-
-                      
-                }
-
-                respuesta2 =  mensaje2.first().content;
+                var respuesta2 = await checkIfAtt({ message: mensaje2 });
 
                 let pregunta3 = new MessageEmbed()
                     .setColor('#0099ff')
@@ -99,18 +75,7 @@ module.exports = async function (interaction) {
                     max: 1
                 }).then(async mensaje3 => {
 
-                    var respuesta3;
-
-                    if ( mensaje3.first().content === ``) {
-                        if (!mensaje.attachments)   respuesta3 = mensaje3.first.content();
-                          respuesta3 = mensaje3.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-                    }
-                    if ( mensaje3.first().content !== ``) {
-                        if (mensaje3.attachments && mensaje3.attachments.size !== 0)
-                            respuesta3 = `\n> **Texto**\n${ mensaje3.first().content}\n\n> **Enlaces Incluidos**\n${mensaje3.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`;
-                    }
-
-                    respuesta3 =  mensaje3.first().content;
+                    var respuesta3 = await checkIfAtt({ message: mensaje3 });
 
                     let pregunta4 = new MessageEmbed()
                         .setColor('#0099ff')
@@ -123,18 +88,7 @@ module.exports = async function (interaction) {
                         max: 1
                     }).then(async mensaje4 => {
 
-                        var respuesta4;
-
-                        if ( mensaje4.first().content === ``) {
-                            if (!mensaje.attachments)   respuesta4 = mensaje4.first.content();
-                              respuesta4 = mensaje4.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-                        }
-                        if ( mensaje4.first().content !== ``) {
-                            if (mensaje4.attachments && mensaje4.attachments.size !== 0)
-                                  respuesta4 = `\n> **Texto**\n${ mensaje4.first().content}\n\n> **Enlaces Incluidos**\n${mensaje4.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`;
-                        }
-
-                        respuesta4 =  mensaje4.first().content;
+                        var respuesta4 = await checkIfAtt({ message: mensaje4 });
 
                         let pregunta5 = new MessageEmbed()
                             .setColor('#0099ff')
@@ -147,25 +101,14 @@ module.exports = async function (interaction) {
                             max: 1
                         }).then(async mensaje5 => {
 
-                            var respuesta5;
-
-                            if ( mensaje5.first().content === ``) {
-                                if (!mensaje.attachments)   respuesta5 = mensaje5.first.content();
-                                  respuesta5 = mensaje5.attachments.map(m => `${m.proxyURL}`).join(`\n`);
-                            }
-                            if ( mensaje5.first().content !== ``) {
-                                if (mensaje5.attachments && mensaje5.attachments.size !== 0)
-                                      respuesta5 = `\n> **Texto**\n${ mensaje5.first().content}\n\n> **Enlaces Incluidos**\n${mensaje5.attachments.map(m => `${m.proxyURL}`).join(`\n`)}`;
-                            }
-                            
-                            respuesta5 =  mensaje5.first().content;
+                            var respuesta5 = await checkIfAtt({ message: mensaje5 });
 
                             channel.bulkDelete(15);
                             var finalEmbed = new MessageEmbed()
                                 .setColor('#0099ff')
                                 .setTitle(`Ticket de Cuenta.`)
                                 .setAuthor(`${guild.name}`, guild.iconURL())
-                                .setDescription(`**${_ticketsQuestions.TicketsCuentas.primera}**\n- ${ mensaje.first().content}\n**${_ticketsQuestions.TicketsCuentas.segunda}**\n- ${ mensaje2.first().content}\n**${_ticketsQuestions.TicketsCuentas.tercera}**\n- ${ mensaje3.first().content}\n**${_ticketsQuestions.TicketsCuentas.cuarta}**\n- ${ mensaje4.first().content}\n**${_ticketsQuestions.TicketsCuentas.quinta}**\n- ${ mensaje5.first().content}`)
+                                .setDescription(`**${_ticketsQuestions.TicketsCuentas.primera}**\n- ${respuesta}\n**${_ticketsQuestions.TicketsCuentas.segunda}**\n- ${respuesta2}\n**${_ticketsQuestions.TicketsCuentas.tercera}**\n- ${respuesta3}\n**${_ticketsQuestions.TicketsCuentas.cuarta}**\n- ${respuesta4}\n**${_ticketsQuestions.TicketsCuentas.quinta}**\n- ${respuesta5}`)
                                 .setTimestamp();
                             channel.send({
                                 content: `${user}, ${staffRole}`,

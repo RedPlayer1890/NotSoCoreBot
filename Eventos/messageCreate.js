@@ -6,7 +6,7 @@ module.exports = async function (message) {
 
     const { existsPrefix, getPrefix } = require('../database/admin');
 
-    if (message.mentions.members.first() && message.mentions.members.first().id === client.user.id && message.type !== 'REPLY') {
+    if (message.mentions.members && message.mentions.members.first().id === client.user.id && message.type !== 'REPLY') {
         let bool = await existsPrefix(message.guild.id);
         if (bool) {
             const {prefix} = await getPrefix(message.guild.id);
