@@ -36,6 +36,13 @@ module.exports = {
             segunda: 'Adjunta captura de tu factura en caso de haber comprado un rango (de lo contrario, solo pon no)',
             tercera: 'Indícanos tu nick in-game.',
             cuarta: 'Si tu duda / problema, no se relaciona con ello, por favor, explica en qué podemos ayudarte.',
+        },
+        TicketsCuentas: {
+            primera: '¿Has comprado un rango o deseas comprar alguno?',
+            segunda: 'Adjunta captura de tu factura en caso de haber comprado un rango (de lo contrario, solo pon no)',
+            tercera: 'Indícanos tu nick in-game.',
+            cuarta: 'Si tu duda / problema, no se relaciona con ello, por favor, explica en qué podemos ayudarte.',
+            quinta: '¿Algo más que agregar?'
         }
     }
 }
