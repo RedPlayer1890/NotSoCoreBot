@@ -5,14 +5,27 @@ module.exports = {
   usage: "meme",
   userPerms: ["SEND_MESSAGES"],
   run: async (client, message, args) => {
-    var num = Math.floor(Math.random() * (500 - 1) + 1);
-    message.channel.send({
-      files: [
-        {
-          attachment: `https://ctk-api.herokuapp.com/meme/${num}`,
-          name: "meme.jpg",
-        },
-      ],
+    const red = require('reddit-fetch');
+    if (!canal) console.log("[NSCB] No se ha podido encontrar el canal de memes diarios.");
+
+    red({
+      subreddit: 'SpanishMeme',
+      sort: 'hot',
+      allowNSFW: false,
+      allowModPost: false,
+      allowCrossPost: false,
+      allowVideo: false
+    }).then(post => {
+      if (!post.url) return canal.send("`❌` No se encontraron memes hoy.");
+
+      const embed = new MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle(post.title)
+        .setImage(post.url)
+
+      message.channel.send({
+        embeds: [embed]
+      });
     });
-  },
-};
+  }
+}
