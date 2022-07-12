@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
   name: "meme",
   description: "Envía un meme aleatorio.",
@@ -6,7 +8,6 @@ module.exports = {
   userPerms: ["SEND_MESSAGES"],
   run: async (client, message, args) => {
     const red = require('reddit-fetch');
-    if (!canal) console.log("[NSCB] No se ha podido encontrar el canal de memes diarios.");
 
     red({
       subreddit: 'SpanishMeme',
