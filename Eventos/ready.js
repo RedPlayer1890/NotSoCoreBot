@@ -92,7 +92,7 @@ module.exports = async function () {
                     embeds: [embed]
                 });
 
-            }).catch((error) => message.channel.send(`\`❌\` Ha ocurrido un error \`\`\`${error.stack}\`\`\``));
+            }).catch((error) => canal.send(`\`❌\` Ha ocurrido un error \`\`\`${error.stack}\`\`\``));
         }, 86400000);
     }
 }
