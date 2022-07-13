@@ -41,7 +41,7 @@ module.exports = async function () {
                 status: 'idle'
             },
             Quinto = {
-                name: 'Beta versión 2.5.3',
+                name: `¡Versión ${client.version}!`,
                 actividad: 'PLAYING',
                 status: 'online'
             },
