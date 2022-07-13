@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = async function () {
     const client = require("../index");
     const db = require("../database/checker");
