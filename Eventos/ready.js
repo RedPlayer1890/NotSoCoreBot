@@ -5,16 +5,16 @@ module.exports = async function () {
 
     db();
 
-    console.log(`=====================================================================`);
-    console.log(`[${new Date().toLocaleString()}] El bot ${client.user.tag} ha sido iniciado correctamente.`);
-    console.log(`[NSCB] El bot está en ${client.guilds.size} servidores.`);
-    console.log(`=====================================================================`);
-
     const commandLoader = require("../Estructuras/CommandLoader");
 
     console.log(`[IMPORTANTE] Cargando comandos...`);
 
     commandLoader(client);
+
+    console.log(`=====================================================================`);
+    console.log(`[${new Date().toLocaleString()}] El bot ${client.user.tag} ha sido iniciado correctamente.`);
+    console.log(`[NSCB] El bot está en ${client.guilds.cache.size} servidores.`);
+    console.log(`=====================================================================`);
     
     let guild_count = client.guilds.cache.size;
         let user_count = client.users.cache.size;
