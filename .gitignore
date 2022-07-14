@@ -1,6 +1,6 @@
 **/node_modules
 *.env
-config.json*
+config.json
 database.db3
 package-lock.json
 Not-So-Core-Bot.rar
