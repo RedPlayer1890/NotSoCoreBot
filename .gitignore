@@ -1,5 +1,5 @@
 **/node_modules
 database.db3
 package-lock.json
-config.json
+./Config/config.json
 Not-So-Core-Bot.rar
