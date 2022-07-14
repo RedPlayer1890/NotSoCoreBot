@@ -2,6 +2,7 @@ module.exports = {
 	name: 'football',
 	aliases: ["fb"],
 	category: "general",
+	type: "TEXT",
 	usage: "football",
 	description: "Juega football en discord.",
 	userPerms: ["SEND_MESSAGES"],

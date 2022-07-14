@@ -5,8 +5,22 @@ module.exports = {
     aliases: [],
     description: 'Envía un mensaje al md de un usuario.',
     usage: 'sendmd <@user> <mensaje>',
-    type: 'TEXT',
+    type: 'BOTH',
     category: 'admin',
+    slashCommandOptions: [
+        {
+            name: "user",
+            type: "USER",
+            description: "El usuario al que se enviará el mensaje.",
+            required: true
+        },
+        {
+            name: "mensaje",
+            type: "STRING",
+            description: "El mensaje que se enviará.",
+            required: true
+        }
+    ],
     userPerms: ["ADMINISTRATOR"],
     run: async function (client, message, args) {
         const user = message.mentions.users.first() || message.guild.members.cache.find(m => m.id === args[0]);
@@ -24,7 +38,38 @@ module.exports = {
             });
             message.reply(`Mensaje enviado a ${user.tag}`);
         } catch (err) {
-            message.reply(`No se pudo enviar el mensaje a ${user.tag}\nSu md probablemente esté cerrado.`);
+            message.reply({
+                embeds: [new MessageEmbed()
+                    .setColor("#ff0000")
+                    .setTitle("Error")
+                    .setDescription(`No se pudo enviar el mensaje a ${user.tag}`)
+                    .setTimestamp()
+                ],
+                ephemeral: true
+            });
+        }
+    },
+    slash: async function (interaction, args, client) {
+        if (!interaction.member.permissions.has("ADMINISTRATOR")) return interaction.reply("No tienes permisos para ejecutar este comando.");
+        
+        const user = interaction.options.get("user").value;
+        const mensaje = interaction.options.get("mensaje").value;
+
+        try {
+            user.send({
+                content: mensaje
+            });
+        }
+        catch (err) {
+            interaction.reply({
+                embeds: [new MessageEmbed()
+                    .setColor("#ff0000")
+                    .setTitle("Error")
+                    .setDescription(`No se pudo enviar el mensaje a ${user.tag}`)
+                    .setTimestamp()
+                ],
+                ephemeral: true
+            });
         }
     }
 }

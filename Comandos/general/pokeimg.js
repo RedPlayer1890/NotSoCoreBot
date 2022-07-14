@@ -4,6 +4,7 @@ module.exports = {
   name: "pokeimg",
   description: "Get Image of the Mentioned Pokemon",
   usage: "pokeimg <pokemon>",
+  type: "TEXT",
   category: "general",
   userPerms: ["SEND_MESSAGES"],
   run: async (client, message, args) => {

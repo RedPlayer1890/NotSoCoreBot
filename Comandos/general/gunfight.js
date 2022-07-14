@@ -2,6 +2,7 @@ module.exports = {
 	name: 'gunfight',
 	aliases: ['gf'],
 	category: "general",
+	type: "TEXT",
 	description: "First one to shoot wins!",
 	usage: "gunfight",
 	userPerms: ["SEND_MESSAGES"],

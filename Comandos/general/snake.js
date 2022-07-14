@@ -5,6 +5,7 @@ module.exports = {
   name: "snake",
   description: "Juego clásico Snake en discord.",
   category: "general",
+  type: "TEXT",
   usage: "snake",
   userPerms: ["SEND_MESSAGES"],
   run: async (client, message, args) => {

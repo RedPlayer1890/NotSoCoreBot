@@ -6,6 +6,7 @@ module.exports = {
   category: "moderacion",
   description: "Banea a el miembro mencionado.",
   usage: "ban <@user> <reason>",
+  type: "TEXT",
   userPerms: ["BAN_MEMBERS"],
   run: async (client, message, args) => {
     let reason = args.slice(1).join(" ");

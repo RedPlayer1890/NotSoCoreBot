@@ -4,6 +4,7 @@ require("moment-duration-format");
 module.exports = {
   name: "serverinfo",
   category: "general",
+  type: "TEXT",
   description: "Shows info about a server",
   usage: "serverinfo",
   userPerms: ["SEND_MESSAGES"],

@@ -5,6 +5,7 @@ module.exports = {
   name: "softban",
   description: "Banea durante un día a un usuario.",
   category: "moderation",
+  type: "TEXT",
   usage: "softban <@user> <reason>",
   userPerms: ["BAN_MEMBERS"],
   run: async (client, message, args) => {

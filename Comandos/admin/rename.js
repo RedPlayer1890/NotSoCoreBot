@@ -35,7 +35,6 @@ module.exports = {
 
         let check = await isTicket(message.channel.id);
         if (check) {
-
             canal.setName(argumentos);
             let embed3 = new MessageEmbed()
                 .setDescription(`Canal renombrado.\nNuevo nombre: ${message.channel}`)

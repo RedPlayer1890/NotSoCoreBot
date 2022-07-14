@@ -39,8 +39,13 @@ module.exports = {
 
         let canal = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]);
 
-        if (!args[0]) return message.reply("¡Debes especificar el ID de el canal!");
-        if (!args.slice(1).join(" ")) return message.reply("Debes escribir un mensaje.");
+        let usoCorrecto = new MessageEmbed()
+            .setColor("#00ff00")
+            .setTitle(`Uso incorrecto detectado`)
+            .setDescription(`El uso correcto es !embed (mención o id de el canal) (descripción de la embed)`)
+
+        if (!args[0]) return message.reply({ embeds: [usoCorrecto] }).then(m => setTimeout(() => m.delete(), 10000));
+        if (!args.slice(1).join(" ")) return message.reply({ embeds: [usoCorrecto] }).then(m => setTimeout(() => m.delete(), 10000));
 
         let texto = args.slice(1).join(" ");
 
@@ -52,6 +57,8 @@ module.exports = {
         // ==============================================================================================
     },
     slash: async function (interaction, args, client) {
+
+        if (!interaction.member.permissions.has("ADMINISTRATOR")) return interaction.reply("No tienes permisos para ejecutar este comando.");
         
         if (interaction.options.get("canal").value) {
             let canal = interaction.guild.channels.cache.get(interaction.options.get("canal").value);
@@ -60,7 +67,7 @@ module.exports = {
                 .setTitle(interaction.options.get("titulo").value)
                 .setDescription(interaction.options.get("descripcion").value);
 
-            canal.send({
+            return canal.send({
                 embeds: [embed]
             });
         }

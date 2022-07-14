@@ -21,7 +21,7 @@ module.exports = async function (message, client) {
 
     if (!cmd) return;
 
-    if (cmd.userPerms && !message.member.permissions.has(cmd.userPerms)) return message.reply("No tienes permisos para ejecutar este comando.");
+    if (cmd.userPerms && !message.member.permissions.has(cmd.userPerms)) return message.reply("`❌` No tienes permisos para ejecutar este comando.");
 
     cmd.run(client, message, args);
     

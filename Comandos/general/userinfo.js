@@ -5,6 +5,7 @@ module.exports = {
     name: "userinfo",
     description: "Get info about your account or mentiobned user's account!",
     usage: "userinfo [@user]",
+    type: "TEXT",
     category: "general",
     userPerms: ["SEND_MESSAGES"],
     aliases: ["ui"],

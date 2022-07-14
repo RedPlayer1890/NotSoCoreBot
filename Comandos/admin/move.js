@@ -38,7 +38,7 @@ module.exports = {
                             embeds: [movidaPapi]
                         })
                     }
-                } else return message.reply("No tienes permisos para mover tickets.").then(m => setTimeout(() => m.delete(), 10000));
+                } else return message.reply("`❌` No tienes permisos para mover tickets.").then(m => setTimeout(() => m.delete(), 10000));
             } else return message.reply({ content: `No se ha encontrado este ticket en la base de datos... ¿Estás bien?` });
         } else return console.log("[😱] No se ha encontrado el rol de soporte.");
     }

@@ -3,6 +3,7 @@ module.exports = {
   description: "Elimina la cantidad de mensajes especificada.",
   category: "moderacion",
   usage: "clear <cantidad>",
+  type: "TEXT",
   userPerms: ["MANAGE_MESSAGES"],
   run: async (client, message, args) => {
    

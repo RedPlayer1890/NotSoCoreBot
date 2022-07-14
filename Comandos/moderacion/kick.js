@@ -7,6 +7,7 @@ module.exports = {
   description: "Expulsa al miembro específicado",
   category: "moderation",
   usage: "kick <@user> <reason>",
+  type: "TEXT",
   userPerms: ["KICK_MEMBERS"],
   run: async (client, message, args) => {
     let target = message.mentions.members.first() || message.guild.users.cache.get(args[0]);

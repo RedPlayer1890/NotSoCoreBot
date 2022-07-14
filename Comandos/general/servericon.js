@@ -4,6 +4,7 @@ module.exports = {
   name: "servericon",
   description: "Retorna el ícono de el servidor.",
   usage: "servericon",
+  type: "TEXT",
   category: "general",
   userPerms: ["SEND_MESSAGES"],
   run: async (client, message, args) => {

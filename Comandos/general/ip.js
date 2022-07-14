@@ -29,7 +29,6 @@ module.exports = {
         if (IP !== undefined || IP !== null) {
             util.status(IP)
                 .then((res, err) => {
-                    console.log(res);
                     if (err) {
                         message.reply({
                             embeds: [

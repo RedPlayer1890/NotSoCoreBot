@@ -1,30 +1,34 @@
-const { MessageEmbed } = require("discord.js");
+const {
+    MessageEmbed
+} = require("discord.js");
 const TicketHandler = require("../Tickets modules/Tickets Handler.js");
 
 module.exports = async function (interaction) {
     const client = require("../index");
 
-    let args = [ interaction.commandName ];
+    let args = [interaction.commandName];
 
     if (interaction.isCommand()) {
-        let commandExecuted = client.commands.find(command => command.name === interaction.commandName);
+        const command = client.commands.find(command => command.name.toLowerCase() == interaction.commandName.toLowerCase());
 
         let array2 = [];
 
-        if (commandExecuted && commandExecuted !== undefined) {
-            commandExecuted.slashCommandOptions.forEach(option => array2.push(`${interaction.options.get(option.name) ? interaction.options.get(option.name).value ? interaction.options.get(option.name).value : "undefined1" : "undefined2"}`));
+        if (!command) return interaction.reply("El comando no está en la lista de comandos de el bot.");
 
-            if (!array2 == "undefined1" || !array2 == "undefined2") {
-                args.push(...commandExecuted.slashCommandOptions.map(v => `${interaction.options.get(v.name).value}`));
-            }
+        if (command.slashCommandOptions > 0) {
+            command.slashCommandOptions.forEach(option => array2.push(`${interaction.options.get(option.name) ? interaction.options.get(option.name).value ? interaction.options.get(option.name).value : "nodef1" : "nodef2"}`));
         }
 
-        const command = client.commands.find(cmd => cmd.name.toLowerCase() == interaction.commandName);
-
-        if (!command) return interaction.reply("<:cross2:936368925481009172> Ese no es un comando valido o habilitado.");
+        if (array2.length > 0) {
+            array2.forEach(e => {
+                if (e !== "nodef1" || e !== "nodef2") {
+                    args.push(...command.slashCommandOptions.map(v => `${interaction.options.get(v.name).value}`));
+                }
+            });
+        }        
 
         if (command.userPerms && !interaction.member.permissions.has(command.userPerms))
-            return interaction.reply("<:cross2:936368925481009172> No tienes permiso de usar esto.");
+            return interaction.reply("`❌` No tienes permiso de usar esto.");
 
         command.slash(interaction, args, client);
     }
@@ -42,7 +46,9 @@ module.exports = async function (interaction) {
                 .setFooter(`${comandosGenerales.size} comandos en total.`)
                 .setTimestamp();
 
-            return interaction.reply({ embeds: [embed] });
+            return interaction.reply({
+                embeds: [embed]
+            });
         }
 
         if (value == "h-moderation") {
@@ -55,7 +61,9 @@ module.exports = async function (interaction) {
                 .setFooter(`${comandosModeracion.size} comandos en total.`)
                 .setTimestamp();
 
-            return interaction.reply({ embeds: [embed] });
+            return interaction.reply({
+                embeds: [embed]
+            });
         }
 
         if (value == "h-admin") {
@@ -68,7 +76,9 @@ module.exports = async function (interaction) {
                 .setFooter(`${comandosAdministración.size} comandos en total.`)
                 .setTimestamp();
 
-            return interaction.reply({ embeds: [embed] });
+            return interaction.reply({
+                embeds: [embed]
+            });
         }
     }
 

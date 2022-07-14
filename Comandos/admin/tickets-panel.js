@@ -3,7 +3,7 @@ const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 module.exports = {
     name: 'ticketpanel',
     aliases: ['tickets', 'panel'],
-    type: 'TEXT',
+    type: 'BOTH',
     slashCommandOptions: [],
     description: 'Crea un panel para tickets',
     category: 'admin',
@@ -30,5 +30,29 @@ module.exports = {
             );
 
         message.channel.send({ embeds: [embed], components: [row]});
+    },
+    slash: async function(client, interaction, args) {
+        if (!interaction.member.permissions.has("MANAGE_GUILD")) return interaction.reply("No tienes permisos para ejecutar este comando.");
+
+        const embed = new MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle('Panel de tickets')
+            .setDescription("**-** _**¡En caso de que necesites soporte, haz click en el botón de abajo!**_")
+            .addField("_ _", "_ _")
+            .addField("Importante", "**·** No debes abrir un ticket sin razón alguna. Pues el soporte es específicamente para problemas los cuales los usuarios no pueden resolver sin ayuda.\n\n**·** No hables apenas se abra el ticket. Primero responde las preguntas, que te hará el bot.")
+            .setTimestamp();
+
+        const row = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setStyle('PRIMARY')
+                    .setLabel("┃ ¡Crear un ticket!")
+                    .setEmoji('🎟')
+                    .setCustomId('ticketPanel')
+            );
+
+        interaction.channel.send({ embeds: [embed], components: [row]});
+
+        interaction.deferUpdate();
     }
 }

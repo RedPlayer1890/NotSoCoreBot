@@ -5,6 +5,7 @@ module.exports = {
   name: "suggest",
   description: "Sugerencias",
   usage: "suggest <mensaje>",
+  type: "TEXT",
   category: "general",
   userPerms: ["ADMINISTRATOR"],
   botPerms: ["EMBED_LINKS"],
