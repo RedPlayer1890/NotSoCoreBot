@@ -9,4 +9,4 @@
  - Sorteos
  - Tickets
  
-<h2>Tiene muchas funciones, y me tomaría mucho describirlas, pero espero puedan sacar buen provecho de este código.</h2>
+**Tiene muchas funciones, y me tomaría mucho describirlas, pero espero puedan sacar buen provecho de este código.**
