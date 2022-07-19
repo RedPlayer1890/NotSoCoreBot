@@ -10,7 +10,7 @@ module.exports = {
   usage: 'start <premio> <tiempo>',
   userPerms: ['MANAGE_MESSAGES'],
   type: 'SLASH',
-  options: [
+  slashCommandOptions: [
     {
       name: 'duración',
       description: 'Duración de el sorteo en formato de tiempo; ejemplo: 1d, 1h, 1m, 1s',
