@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const messages = require("../utils/message");
+const messages = require("../../Utils/message");
 const ms = require("ms");
 const config = require("../../Config/config.json");
 
@@ -158,7 +158,6 @@ module.exports = {
           cumulative: false
         }
       ],
-      // Messages
       messages,
       extraData: {
         server: reqinvite == null ? "null" : reqinvite.guild.id,
