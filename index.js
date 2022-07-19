@@ -4,6 +4,7 @@ const { GiveawaysManager } = require("discord-giveaways");
 const allIntents = new Intents(32767);
 const client = new Client({ intents: allIntents });
 const AntiCrash = require("./Utils/AntiCrash");
+const giveawaysHandler = require("./GiveawaysEvents/Handler");
 
 AntiCrash();
 
@@ -21,6 +22,8 @@ client.giveawaysManager = new GiveawaysManager(client, {
     }
   }
 });
+
+giveawaysHandler(client);
 
 client.commands = new Collection();
 

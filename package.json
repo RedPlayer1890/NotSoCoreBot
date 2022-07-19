@@ -6,6 +6,7 @@
   "description": "",
   "dependencies": {
     "discord-gamecord": "^2.0.0",
+    "discord-giveaways": "^5.2.2",
     "discord.js": "^13.8.0",
     "fs": "^0.0.1-security",
     "minecraft-server-status": "^1.0.1",
