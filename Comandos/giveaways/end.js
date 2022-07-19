@@ -45,7 +45,10 @@ module.exports = {
 
         client.giveawaysManager.end(giveaway.messageId)
             .then(() => {
-                interaction.reply(`**[Este sorteo](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId})** fue terminado correctamente.`);
+                interaction.reply({
+                    content: `**[Este sorteo](https://discord.com/channels/${giveaway.guildId}/${giveaway.channelId}/${giveaway.messageId})** fue terminado correctamente.`,
+                    ephemeral: true
+                });
             })
             .catch((e) => {
                 interaction.reply({
