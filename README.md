@@ -8,5 +8,7 @@
  - Comandos generales
  - Sorteos
  - Tickets
+
+ ![Discord de soporte](https://discord.gg/x7pP9YytDt)
  
 **Tiene muchas funciones, y me tomaría mucho describirlas, pero espero puedan sacar buen provecho de este código.**
