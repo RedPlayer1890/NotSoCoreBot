@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const client = require("../../index");
 
 module.exports = {
     name: 'ping',
@@ -8,7 +9,7 @@ module.exports = {
     slashCommandOptions: [],
     usage: 'ping',
     category: 'general',
-    run: async function (client, message, args) {
+    run: async function (cliente, message, args) {
         let ping = Math.floor(client.ws.ping);
         let embed = new MessageEmbed()
             .setColor('#0099ff')
@@ -27,7 +28,7 @@ module.exports = {
             msg.edit({ embeds: [embed] });
         })
     },
-    slash: async function (client, interaction, args) {
+    slash: async function (cliente, interaction, args) {
         let ping = Math.floor(client.ws.ping);
         let embed = new MessageEmbed()
             .setColor('#0099ff')
