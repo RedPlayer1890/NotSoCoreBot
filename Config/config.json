@@ -1,6 +1,7 @@
 {
     "token": "",
     "dirbase": "./database/database.db3",
+    "giveawaysDB": "./GADB.json",
     "prefix": "!",
     "logsChannels": {
         "sanciones": "sanciones",
