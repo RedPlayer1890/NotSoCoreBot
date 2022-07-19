@@ -10,7 +10,7 @@ module.exports = {
   type: 'SLASH',
   usage: 'listGA',
   category: 'giveaways',
-  slash: async (client, interaction) => {
+  slash: async (interaction, args, client) => {
     const select = new MessageSelectMenu()
       .setCustomId("select")
       .setPlaceholder("Choose a type of giveaway to view!")

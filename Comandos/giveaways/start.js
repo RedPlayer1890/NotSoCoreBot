@@ -61,7 +61,7 @@ module.exports = {
     },
   ],
 
-  run: async (client, interaction) => {
+  run: async (interaction, args, client) => {
 
     if (!interaction.member.permissions.has('MANAGE_MESSAGES') && !interaction.member.roles.cache.some((r) => r.name === config.rolesInfo.giveawaysAdmin)) {
       return interaction.reply({
