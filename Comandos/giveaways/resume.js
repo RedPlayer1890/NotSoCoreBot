@@ -16,7 +16,7 @@ module.exports = {
         }
     ],
 
-    run: async (interaction, args, client) => {
+    slash: async (interaction, args, client) => {
         if (!interaction.member.permissions.has('MANAGE_MESSAGES') && !interaction.member.roles.cache.some((r) => r.name ===config.rolesInfo.giveawaysAdmin)) {
             return interaction.reply({
                 content: ':x: No tienes el permiso requerido para reanudar sorteos.',
