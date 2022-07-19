@@ -9,6 +9,6 @@
  - Sorteos
  - Tickets
 
- ![Discord de soporte](https://discord.gg/x7pP9YytDt)
+ ![Discord](https://img.shields.io/badge/-DiscordSupport-000000?style=flat&logo=DISCORD&labelColor=ffffff)
  
 **Tiene muchas funciones, y me tomaría mucho describirlas, pero espero puedan sacar buen provecho de este código.**
