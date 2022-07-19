@@ -23,6 +23,7 @@
     },
     "rolesInfo": {
         "Owner": "Owner",
-        "Staff": "Soporte"
+        "Staff": "Soporte",
+        "giveawaysAdmin": "Administrador de Sorteos"
     }
 }

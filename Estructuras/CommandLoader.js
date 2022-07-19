@@ -28,6 +28,15 @@ module.exports = async function (client) {
             client.commands.set(command.name, command);
         });
 
+    fs.readdirSync("./Comandos/giveaways")
+        .filter(file => file.endsWith(".js"))
+        .forEach(file => {
+            const command = require(`../Comandos/giveaways/${file}`);
+            console.log(`[CMD LOADER] El comando ${command.name} fue cargado.`);
+
+            client.commands.set(command.name, command);
+        });
+
 
     const slashCommands = client.commands.filter(cmd => ["BOTH", "SLASH"].includes(cmd.type))
         .map(cmd => ({
