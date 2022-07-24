@@ -18,7 +18,7 @@ module.exports = {
         const staffRole = message.guild.roles.cache.find(r => r.name === config.rolesInfo.Staff);
         const transcriptChannel = message.guild.channels.cache.find(c => c.name == config.logsChannels.transcriptChannel);
 
-        if (!message.member.roles.cache.has(staffRole.id)) return message.reply(`¡Este comando está restringido para el uso de los staffs!`);
+        if (!message.member.roles.cache.has(staffRole.id) && !message.member.permissions.has("ADMINISTRATOR")) return message.reply(`¡Este comando está restringido para el uso de los staffs!`);
         if (!message.channel.topic) return message.reply({
             embeds: [
                 new MessageEmbed()
