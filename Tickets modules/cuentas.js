@@ -22,7 +22,7 @@ module.exports = async function (interaction) {
 
     const channel = interaction.channel;
 
-    channel.setParent(Cuentas);
+    channel.setParent(Cuentas, { lockPermissions: false });
     channel.setTopic(`ID: ${user.id}`);
     channel.setName(`cuenta-${interaction.user.tag}`);
 
