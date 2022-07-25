@@ -12,7 +12,7 @@ module.exports = {
     let reason = args.slice(1).join(" ");
     if (!reason) reason = "Sin razón especificada";
 
-    const target = message.mentions.members.first() || message.guild.users.cache.get(args[0]);
+    const target = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 
     if (!target) {
       return message.reply({
