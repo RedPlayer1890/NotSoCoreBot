@@ -1,6 +1,6 @@
 {
     "token": "",
-    "dirbase": "./database/database.db3",
+    "dirbase": "./database/database.sql",
     "giveawaysDB": "./GADB.json",
     "prefix": "!",
     "logsChannels": {
@@ -8,10 +8,15 @@
         "transcriptChannel": "transcripts"
     },
     "suggestChannel": {
-        "activo": true,
+        "activo": false,
         "canalID": "569098984100908800"
     },
-    "canalErrores": "errores",
+    "canalErrores": {
+        "activo": false,
+        "canalID": "569098984100908800",
+        "guildID": "569098984100908800"
+    },
+    "noCanalLogErrores": false,
     "memesDiarios": {
         "activado": false,
         "canal": "memes-diarios",
