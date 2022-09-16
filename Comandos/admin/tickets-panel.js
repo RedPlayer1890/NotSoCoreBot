@@ -31,7 +31,7 @@ module.exports = {
 
         message.channel.send({ embeds: [embed], components: [row]});
     },
-    slash: async function(client, interaction, args) {
+    slash: async function(interaction, client, args) {
         if (!interaction.member.permissions.has("MANAGE_GUILD")) return interaction.reply("No tienes permisos para ejecutar este comando.");
 
         const embed = new MessageEmbed()
@@ -53,6 +53,6 @@ module.exports = {
 
         interaction.channel.send({ embeds: [embed], components: [row]});
 
-        interaction.deferUpdate();
+        //interaction.deferUpdate();
     }
 }

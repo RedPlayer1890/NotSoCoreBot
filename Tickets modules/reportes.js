@@ -22,10 +22,10 @@ module.exports = async function (interaction) {
 
     const channel = interaction.channel;
 
-    channel.setParent(Reportes, { lockPermissions: false });
     channel.setTopic(`ID: ${user.id}`);
     channel.setName(`reporte-${interaction.user.tag}`);
-
+    channel.setParent(Reportes, { lockPermissions: false });
+    
     newTicket(channel.id, true);
 
     let embed = new MessageEmbed()

@@ -2,5 +2,7 @@
 *.env
 config.json
 database.db3
+database.sql
 package-lock.json
-Not-So-Core-Bot.rar
+NotSoCoreBot.rar
+NotSoCoreBot.zip

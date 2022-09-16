@@ -3,32 +3,6 @@ const config = require("../Config/config.json");
 const queries = require("./queries");
 
 module.exports = {
-
-    isTicket: async function (channelId) {
-        let query = "SELECT * FROM tickets WHERE channelId = ?"
-        let result = await queries.getQuery(query, channelId)
-        if (result) {
-            return result;
-        } else {
-            return false;
-        }
-    },
-
-    newTicket: async function (channelId, boolean) {
-        let query = "INSERT INTO tickets (channelId, checkchannel) VALUES(?, ?)"
-        await queries.runQuery(query, [channelId, boolean])
-    },
-
-    deleteTicket: async function (channelId) {
-        let query = "DELETE FROM tickets WHERE channelId = ?"
-        try {
-            await queries.runQuery(query, [channelId]);
-        } catch (error) {
-            console.error(error)
-        }
-    },
-
-    // REVIEW: Prefixes functions - SQLITE3
     //TypeDef: (String) guildID, (String) prefix
 
     existsPrefix: async function (idserver) {
@@ -104,5 +78,53 @@ module.exports = {
     deleteIP: async function (guildID) {
         let query = "DELETE FROM ips WHERE guildID = ?";
         await queries.runQuery(query, guildID);
+    },
+
+    // Tickets functions - SQLITE3
+
+    isTicket: async function (channelId) {
+        let query = "SELECT * FROM tickets WHERE channelId = ?"
+        let result = await queries.getQuery(query, channelId)
+
+        if (result) {
+            return result;
+        } else {
+            return false;
+        }
+    },
+
+    newTicket: async function (channelId, boolean, userId) {
+        let query = "INSERT INTO tickets (channelID, checkchannel) VALUES(?, ?)";
+        await queries.runQuery(query, [channelId, boolean]);
+
+        let query2 = "INSERT INTO tickets_creators (channelID, userID) VALUES(?, ?)";
+        await queries.runQuery(query2, [channelId, userId]);
+    },
+
+    deleteTicket: async function (channelId) {
+        let query = "DELETE FROM tickets WHERE channelId = ?"
+        try {
+            await queries.runQuery(query, [channelId]);
+        } catch (error) {
+            console.error(error)
+        }
+    },
+
+    getTickets: async function (userId) {
+        let query = "SELECT * FROM tickets_creators WHERE userID = ?";
+        let result = await queries.getQuery(query, userId);
+
+        return result;
+    },
+    
+    hasTickets: async function (userId) {
+        let query = "SELECT * FROM tickets_creators WHERE userID = ?";
+        let result = await queries.getQuery(query, userId);
+
+        if (result !== undefined) {
+            return true;
+        }
+
+        return false;
     }
 }

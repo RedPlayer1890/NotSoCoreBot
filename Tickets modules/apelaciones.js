@@ -23,9 +23,9 @@ module.exports = async function (interaction) {
 
     const channel = interaction.channel;
 
-    channel.setParent(Apelaciones, { lockPermissions: false });
     channel.setTopic(`ID: ${user.id}`);
     channel.setName(`apelación-${interaction.user.tag}`);
+    channel.setParent(Apelaciones, { lockPermissions: false });
     
     newTicket(channel.id, true);
 

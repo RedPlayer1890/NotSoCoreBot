@@ -22,10 +22,10 @@ module.exports = async function (interaction) {
 
     const channel = interaction.channel;
 
-    channel.setParent(AyudaGeneral, { lockPermissions: false });
     channel.setTopic(`ID: ${user.id}`);
     channel.setName(`ayuda-${interaction.user.tag}`);
-
+    channel.setParent(AyudaGeneral, { lockPermissions: false });
+    
     newTicket(channel.id, true);
 
     let embed = new MessageEmbed()

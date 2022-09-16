@@ -83,7 +83,8 @@ module.exports = async function (interaction, client) {
 
             interaction.guild.channels.create(`ticket-${user.tag}`, {
                 type: 'GUILD_TEXT',
-                permissionOverwrites: [{
+                permissionOverwrites: [
+                    {
                         id: guild.id,
                         deny: ['VIEW_CHANNEL']
                     },
@@ -101,13 +102,12 @@ module.exports = async function (interaction, client) {
                 const miembro = interaction.member;
 
                 await thread.send({
-                    content: `¡Hola ${miembro}!`,
+                    content: `¡Hola, ${miembro}!`,
                     embeds: [embed],
-                    components: [row],
-                    ephemeral: true
+                    components: [row]
                 });
 
-                newTicket(thread.id, true);
+                newTicket(thread.id, true, interaction.user.id);
 
                 interaction.reply({
                     content: `¡Ticket abierto! Ve a él haciendo click acá: ${thread}`,
